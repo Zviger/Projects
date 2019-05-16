@@ -6,7 +6,6 @@ import requests
 from bs4 import BeautifulSoup
 from app.core import database
 from app.core import tasks
-from multiprocessing.dummy import Pool as ThreadPool
 from app.core.database import (
     DB,
     clear_db,
@@ -92,11 +91,11 @@ def get_all_pages_url(start_url, max_pages=None):
     urls = []
     if not max_pages:
         total_pages = get_total_pages(get_html(start_url))
-        for i in range(total_pages)[1:]:  # because the first page contains apartments from other pages
-            urls.append(BASE_URL + str(i))
+        for _ in range(total_pages)[1:]:  # because the first page contains apartments from other pages
+            urls.append(BASE_URL + "1")
     else:
-        for i in range(max_pages)[1:]:
-            urls.append(BASE_URL + str(i))
+        for _ in range(max_pages)[1:]:
+            urls.append(BASE_URL + "1")
     return urls
 
 
