@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Flat</title>
+    <script charset="utf-8" src="https://api-maps.yandex.ru/services/coverage/v2/?l=map&amp;ll=27.60850000,53.95220000&amp;z=17&amp;lang=ru_RU&amp;callback=jsonp_yandex_coverage__l_map_ll_27_60850000_53_95220000_z_17_lang_ru_RU"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" media="all"
+          href="https://realt.by/typo3temp/scriptmerger/uncompressed/head-56908d2c5eac3be4a06f70c33a1b8ec0.merged.css">
+    <link rel="stylesheet" type="text/css" media="all"
+          href="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css">
+    <link rel="stylesheet" type="text/css" media="all"
+          href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css"
+          href="//fonts.googleapis.com/css?family=Open+Sans+Condensed:700|Open+Sans:400,400i,700,700i|Roboto+Condensed&amp;subset=cyrillic"
+          media="all">
+    <link rel="shortcut icon" href="https://realt.by/fileadmin/realt/favicon.ico" type="image/x-icon; charset=binary">
+    <link rel="icon" href="https://realt.by/fileadmin/realt/favicon.ico" type="image/x-icon; charset=binary">
+    <script crossorigin="anonymous" src="https://api-maps.yandex.ru/2.1.73/map.js?callback=__jsonp_ymaps_map&amp;mode=release&amp;flags="></script>
+
+    <head>
+    </head>
+</head>
+<body>
+
+
+<nav class="navbar navbar-expand-lg navbar-light bg-dark">
+    <a class="btn btn-primary" href="/" role="button">Главная</a>
+
+
+
+</nav>
+<div class="wrapper" id="wrapper">
+    <div class="header-banner no-print">
+        <ins data-revive-zoneid="56" data-revive-block="1" data-revive-blockcampaign="1"
+             data-revive-id="5b8b51ed34faf602404204efa4a6143f"></ins>
+        <div class="inner-content"> <!-- INDEX-LEFT-CONTENT -->
+            <div class="inner-center-content">
+                <div id="c1030" class="csc-default">
+                    <!-- BEGIN: Content of extension "uedb_flat", plugin "tx_uedbflat_pi2" -->
+                    <div class="tx-uedb mt-3">
+                        <a id="top" name="top"></a>
+                        <strong>
+                            <span style="font-size: 20.0pt; line-; color: red;">{{ flat["title"] }}</span>
+                            <a class="btn btn-link" href="{{flat.url}}" role="button">Link</a>
+                        </strong>
+                        <div class="table-zebra">
+                            <div class="table-zebra-top"><a id="photos" name="photos"></a>
+                                <p class="b14 fl">Фотографии и планировки объекта:</p></div>
+                            <div class="table-photos">
+                                <div class="photos">
+                                    <div class="row">
+                                        <div class="col-7 " >
+                                            {% for photo_url in flat.photo_urls %}
+                                                <div class="photo-item">
+                                                    <a  href="{{ photo_url }}"
+                                                     target="_blank"
+                                                     class="fancybox" rel="gallery">
+                                                    <img src= "{{ photo_url }}">
+                                                   </a>
+                                                </div>
+                                            {% endfor %}
+                                         </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="table-zebra-top">
+                            <p class="b14 fl">Контактная информация:</p>
+                        </div>
+                        <table class="table-zebra">
+                            <tbody>
+                            <tr class="table-row odd">
+                                <td class="table-row-left">Телефоны</td>
+                                <td class="table-row-right">
+                                    <div>
+                                        <strong>
+                                            {% for telephone in flat.telephones %}
+                                                <p>
+                                                    +{{ telephone }}
+                                                </p>
+                                            {% endfor %}
+                                        </strong>
+                                    </div>
+                                </td>
+                            </tr>
+                            {% if flat.agency %}
+                            <tr class="table-row">
+                                <td class="table-row-left">Агентство</td>
+                                <td class="table-row-right">
+                                    {{flat.agency}}
+                                </td>
+                            </tr>
+                            {% endif %}
+                            </tbody>
+                        </table>
+                        <div class="table-zebra-top">
+                            <p class="b14 fl">Местоположение:</p>
+                        </div>
+                        <table class="table-zebra">
+                            <tbody>
+                            <tr class="table-row odd">
+                                <td class="table-row-left">Область</td>
+                                <td class="table-row-right">
+                                    <a target="_blank">{{flat.region}}</a>
+                                </td>
+                            </tr>
+                            <tr class="table-row ">
+                                <td class="table-row-left">Населенный пункт</td>
+                                <td class="table-row-right">
+                                    <a target="_blank">
+                                        <strong>{{flat.locality}}</strong>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr class="table-row odd">
+                                <td class="table-row-left">Адрес</td>
+                                <td class="table-row-right">
+                                    <a target="_blank">{{flat.address}}</a>
+                                </td>
+                            </tr>
+                            {% if flat.district_city %}
+                                <tr class="table-row ">
+                                <td class="table-row-left">Район города</td>
+                                <td class="table-row-right">
+                                    <a target="_blank">{{flat.district_city}}</a>
+                                </td>
+                                </tr>
+                            {% endif %}
+                            {% if flat.district_area %}
+                                <tr class="table-row odd">
+                                <td class="table-row-left">Район области</td>
+                                <td class="table-row-right">
+                                    <a target="_blank">{{flat.district_area}}</a>
+                                </td>
+                                </tr>
+                            {% endif %}
+
+                            </tbody>
+                        </table>
+                        <div class="table-zebra-top"><p class="b14 fl">Параметры объекта:</p></div>
+                        <table class="table-zebra">
+                            <tbody>
+                                <tr class="table-row odd">
+                                    <td class="table-row-left">Комнат всего/разд.</td>
+                                    <td class="table-row-right"><strong>{{flat.count_rooms}}</strong></td>
+                                </tr>
+                                {% if flat.floor_floor %}
+                                <tr class="table-row ">
+                                    <td class="table-row-left">Этаж / этажность</td>
+                                    <td class="table-row-right">{{flat.floor_floor}}</td>
+                                </tr>
+                                {% endif %}
+                                <tr class="table-row odd">
+                                    <td class="table-row-left">Тип дома</td>
+                                    <td class="table-row-right">{{flat.build_type}}</td>
+                                </tr>
+                                <tr class="table-row ">
+                                    <td class="table-row-left">Общая площадь</td>
+                                    <td class="table-row-right"><strong>{{flat.full_area}} м²</strong></td>
+                                </tr>
+                                {% if flat.agency %}
+                                <tr class="table-row odd">
+                                    <td class="table-row-left">Год постройки</td>
+                                    <td class="table-row-right">{{flat.year_built}}</td>
+                                </tr>
+                                {% endif %}
+                                <tr class="table-row ">
+                                    <td class="table-row-left">Сан/узел</td>
+                                    <td class="table-row-right">{{flat.bathroom}}</td>
+                                </tr>
+                                {% if flat.layout %}
+                                <tr class="table-row odd">
+                                    <td class="table-row-left">Ремонт</td>
+                                    <td class="table-row-right">{{flat.layout}}</td>
+                                </tr>
+                                {% endif %}
+                                {% if flat.ceiling_height %}
+                                <tr class="table-row odd">
+                                    <td class="table-row-left">Высота потолков</td>
+                                    <td class="table-row-right">{{flat.ceiling_height}}</td>
+                                </tr>
+                                {% endif %}
+                            </tbody>
+                        </table>
+                        <table class="table-zebra">
+                            <tbody>
+                                {% if flat.notes %}
+                                <tr class="table-row ">
+                                    <tr class="table-row odd">
+                                    <td class="table-row-left">Примечания</td>
+                                    <td class="table-row-right">{{flat.notes}}</td>
+                                </tr>
+                                {% endif %}
+                            </tbody>
+                        </table>
+                        <div class="table-zebra-top"><p class="b14 fl">Условия продажи:</p>
+                        </div>
+                        <table class="table-zebra">
+                            <tr class="table-row odd">
+                                <td class="table-row-left">Ориентировочная стоимость эквивалентна:</td>
+                                <td class="table-row-right">
+                                    <div>
+                                        <strong>{{full_cost}} руб, {{last_cost}} руб/кв.м.
+
+                                        </strong>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr class="table-row odd">
+                                <td class="table-row-left">Средняя ориентировочная цена эквивалентна:</td>
+                                <td class="table-row-right">
+                                    <div>
+                                        <strong>{{average_cost}} руб/кв.м.
+
+                                        </strong>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr class="table-row odd">
+                                <td class="table-row-left">Предсказанная цена:</td>
+                                <td class="table-row-right">
+                                    <div>
+                                        <strong>{{predicted_cost}} руб/кв.м.
+
+                                        </strong>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                        <div class="table-zebra-top"><p class="b14 fl">Условия продажи:</p>
+                            <div class="price_chart" id="price_chart"></div>
+                        </div>
+                    </div> <!-- END: Content of extension "uedb_flat", plugin "tx_uedbflat_pi2" parsetime:111 ms -->
+                </div>
+            </div> <!-- inner-center-content --><!-- ###INNER-RIGHT-CONTENT### begin -->
+        </div> <!-- inner-content -->
+    </div>
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script>
+        google.charts.load('current', {'packages':['corechart']});
+        google.charts.setOnLoadCallback(drawChart);
+        window.addEventListener('resize', function(event){
+            drawChart();
+        });
+        function drawChart() {
+            let data = google.visualization.arrayToDataTable([
+              ['Время', 'Реальная цена', 'Предсказанная цена'],
+                {% for date, price in flat.cost_square_meter.items() %}
+                    [new Date({{date.replace(':', ',')}}), {{price}}, {{predicted_cost}}],
+                {% endfor %}
+            ]);
+            let options = {
+              title: 'График изменения цены',
+              curveType: 'function',
+              width: '100%',
+              legend: { position: 'bottom' },
+              hAxis: {
+                format: 'yy.M.d',
+              },
+              pointSize: 5
+            };
+            function resize () {
+                let chart = new google.visualization.LineChart(document.getElementById('price_chart'));
+                chart.draw(data, options);
+            }
+            window.onload = resize();
+            window.onresize = resize();
+        }
+    </script>
+
+
+</div>
+</body>
+</html>

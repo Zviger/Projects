@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Flats</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" media="all"
+          href="https://realt.by/typo3temp/scriptmerger/uncompressed/head-56908d2c5eac3be4a06f70c33a1b8ec0.merged.css">
+    <link rel="stylesheet" type="text/css" media="all"
+          href="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css">
+    <link rel="stylesheet" type="text/css" media="all"
+          href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css"
+          href="//fonts.googleapis.com/css?family=Open+Sans+Condensed:700|Open+Sans:400,400i,700,700i|Roboto+Condensed&amp;subset=cyrillic"
+          media="all">
+    <link rel="shortcut icon" href="https://realt.by/fileadmin/realt/favicon.ico" type="image/x-icon; charset=binary">
+    <link rel="icon" href="https://realt.by/fileadmin/realt/favicon.ico" type="image/x-icon; charset=binary">
+    <head>
+    </head>
+<body>
+
+
+<nav class="navbar navbar-expand-lg navbar-light bg-dark">
+    <a class="btn btn-primary" href="/" role="button">Главная</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse">
+        <ul class="navbar-nav mr-auto">
+
+        </ul>
+        <form class="form-inline my-2 my-lg-0" method="GET">
+            <input class="form-control mr-sm-2" type="search" placeholder="поиск" aria-label="Search" name="q" value="{{ request.args.get('q', '') }}">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Поиск</button>
+        </form>
+    </div>
+</nav>
+<div class="wrapper pt-3" id="wrapper">
+    {% for flat in flats %}
+
+    <div class="container ">
+        <div class="row">
+            <div class="col-5">
+                <div class="bd-item" data-mode="2" data-page="0" data-region="0">
+                    <div class="title">
+                        <a href="{{ url_for('flat_detail', flat_id=flat._id) }}">{{ flat.title }}> </a>
+                    </div>
+                    <div class="bd-item-left">
+                        <div class="bd-item-left-top">
+                            <a href="{{ url_for('flat_detail', flat_id=flat._id) }}">
+                                <img class="lazy" data-original= "{{ flat.photo_urls[0] }}"
+                                     width="180" height="120" src="{{ flat.photo_urls[0] }}" style="display: inline;">
+                            </a>
+                        </div> <!-- bd-item-left-top -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    <nav aria-label="Page navigation example">
+      <ul class="pagination">
+        <li class="page-item"><a class="page-link" href="./?page={{ prev(page) }}">Previous</a></li>
+        <li class="page-item"><a class="page-link" href="./?page={{ page }}">{{page}}</a></li>
+        <li class="page-item"><a class="page-link" href="./?page={{ page + 1 }}">{{page + 1}}</a></li>
+        <li class="page-item"><a class="page-link" href="./?page={{ page + 2 }}">{{page + 2}}</a></li>
+        <li class="page-item"><a class="page-link" href="./?page={{ next(page) }}">Next</a></li>
+          <li class="page-item"><a class="page-link" href="./?page={{ last() }}">Last</a></li>
+      </ul>
+</nav>
+</div>
+
+
+</body>
