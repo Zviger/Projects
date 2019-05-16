@@ -347,16 +347,14 @@ def create_new_db(max_pages=None):
         pass
     clear_db()
 
-    all_pages_url = get_all_pages_url(BASE_URL + str(0), max_pages)
-    for urls in chunks_urls(all_pages_url):
+    for urls in chunks_urls(get_all_pages_url(BASE_URL + "0", max_pages)):
         tasks.insert_page_data_in_db.delay(urls)
 
 
 def update_all_db():
-    all_pages_url = get_all_pages_url(BASE_URL + str(0))
-    #for urls in chunks_urls_from_db():
-    #    tasks.remove_sold_flats_from_db.delay(urls)
-    for urls in chunks_urls(all_pages_url):
+    for urls in chunks_urls_from_db():
+        tasks.remove_sold_flats_from_db.delay(urls)
+    for urls in chunks_urls(get_all_pages_url(BASE_URL + "0")):
         tasks.update_db_with_pages.delay(urls)
 
 
