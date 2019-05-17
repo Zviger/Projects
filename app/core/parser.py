@@ -13,6 +13,8 @@ from app.core.database import (
 
 BASE_URL = "https://realt.by/sale/flats/?page="
 
+START_URL = BASE_URL + "0"
+
 SESSION = requests.Session()
 
 FIELD_MAPPING = {"Область": "region",
@@ -81,21 +83,13 @@ def get_total_pages(html):
     return int(pages)
 
 
-def get_all_pages_url(start_url, max_pages=None):
+def get_all_pages_url():
     """
     Gets all URLs for parsing by the number of pages.
-    :param start_url:
-    :param max_pages:
     :return:
     """
-    urls = []
-    if not max_pages:
-        total_pages = get_total_pages(get_html(start_url))
-        for _ in range(total_pages)[1:]:  # because the first page contains apartments from other pages
-            urls.append(BASE_URL + "1")
-    else:
-        for _ in range(max_pages)[1:]:
-            urls.append(BASE_URL + "1")
+    total_pages = get_total_pages(get_html(START_URL))                  # because the first page contains apartments
+    urls = [BASE_URL + str(page) for page in range(total_pages)[1:]]    # from other pages
     return urls
 
 
@@ -341,19 +335,17 @@ def get_urls_to_remove(urls):
     return urls_to_remove
 
 
-def create_new_db(max_pages=None):
-    with open("realt_by.csv", "w"):
-        pass
+def create_new_db():
     clear_db()
 
-    for urls in chunks_urls(get_all_pages_url(BASE_URL + "0", max_pages)):
+    for urls in chunks_urls(get_all_pages_url()):
         tasks.insert_page_data_in_db.delay(urls)
 
 
 def update_all_db():
     for urls in chunks_urls_from_db():
         tasks.remove_sold_flats_from_db.delay(urls)
-    for urls in chunks_urls(get_all_pages_url(BASE_URL + "0")):
+    for urls in chunks_urls(get_all_pages_url()):
         tasks.update_db_with_pages.delay(urls)
 
 

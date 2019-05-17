@@ -1,6 +1,6 @@
 import csv
 
-FILENAME = "/home/zviger/PycharmProjects/parser_realt.by/app/core/population_by_0.csv"
+FILENAME = "population_by_0.csv"
 
 DATA_SET = {}
 
